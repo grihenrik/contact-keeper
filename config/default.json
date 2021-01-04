@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://contact-keeper:${password}@cluster0.udhpc.mongodb.net/${dbname}?retryWrites=true&w=majority",
+  "jwtSecret": "njreght4uh3r5glkjehrgkh",
+  "refreshSecret": "ghreugheurhgrfvjnkelabarwapgocnvbdsnvccmzxbvjru"
+}
