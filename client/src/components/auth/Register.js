@@ -26,10 +26,6 @@ const Register = (props) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    // if (localStorage.token) {
-    //   loadUser();
-    //   props.history.push("/");
-    // }
     if (isAuthenticated) {
       props.history.push("/");
     }

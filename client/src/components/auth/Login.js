@@ -20,6 +20,9 @@ const Login = (props) => {
     if (isAuthenticated) {
       props.history.push("/");
     }
+    if (error === "Invalid credentials") {
+      setAlert(error, "danger");
+    }
     return () => {
       clearErrors();
     };
@@ -27,13 +30,16 @@ const Login = (props) => {
   }, [error, isAuthenticated, props.history]);
   const submitForm = async (e) => {
     e.preventDefault();
-    console.log(user);
-    removeAlert();
-    try {
-      await login({ email: email, password: password });
-      loadUser();
-    } catch (error) {
-      setAlert("Login failed");
+    if (email === "" || password === "") {
+      setAlert("Please fill in all fields", "danger");
+    } else {
+      removeAlert();
+      try {
+        await login({ email: email, password: password });
+        loadUser();
+      } catch (error) {
+        setAlert("Login failed");
+      }
     }
   };
   const innerHeight = window.innerHeight - 50;
@@ -53,6 +59,7 @@ const Login = (props) => {
               label="Email"
               name="email"
               value={email}
+              required
               onChange={handleChange}
             />
             <Form.Input
@@ -60,6 +67,7 @@ const Login = (props) => {
               type="password"
               label="Password"
               value={password}
+              required
               onChange={handleChange}
             />
 
