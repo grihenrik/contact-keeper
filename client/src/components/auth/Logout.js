@@ -4,7 +4,7 @@ import AuthContext from "../../context/auth/authContext";
 const Logout = (props) => {
   const authContext = useContext(AuthContext);
 
-  const { isAuthenticated, clearErrors, logout } = authContext;
+  const { clearErrors, logout } = authContext;
 
   useEffect(() => {
     logout();

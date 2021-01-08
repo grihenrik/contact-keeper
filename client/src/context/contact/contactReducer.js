@@ -7,6 +7,9 @@ import {
   FILTER_CONTACTS,
   CLEAR_FILTER,
   TOGGLE_VISIBLE,
+  CONTACT_ERROR,
+  GET_CONTACTS,
+  CLEAR_CONTACTS,
 } from "../types";
 
 const contactReducer = (state, action) => {
@@ -15,30 +18,47 @@ const contactReducer = (state, action) => {
       return {
         ...state,
         contacts: [...state.contacts, action.payload],
+        loading: false,
       };
     case DELETE_CONTACT:
       return {
         ...state,
         contacts: state.contacts.filter(
-          (contact) => contact.id !== action.payload
+          (contact) => contact._id !== action.payload
         ),
+        loading: false,
+      };
+    case GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false,
+      };
+    case CLEAR_CONTACTS:
+      return {
+        ...state,
+        contacts: [],
+        loading: false,
       };
     case SET_CURRENT:
       return {
         ...state,
         current: action.payload,
+        loading: false,
       };
     case CLEAR_CURRENT:
       return {
         ...state,
         current: null,
+        loading: false,
       };
     case UPDATE_CONTACT:
       return {
         ...state,
         contacts: state.contacts.map((contact) =>
-          contact.id === action.payload.id ? action.payload : contact
+          contact._id === action.payload.id ? action.payload : contact
         ),
+        loading: false,
       };
     case FILTER_CONTACTS:
       return {
@@ -47,16 +67,25 @@ const contactReducer = (state, action) => {
           const regex = new RegExp(`${action.payload}`, "gi");
           return contact.name.match(regex) || contact.email.match(regex);
         }),
+        loading: false,
       };
     case CLEAR_FILTER:
       return {
         ...state,
         filtered: null,
+        loading: false,
       };
     case TOGGLE_VISIBLE:
       return {
         ...state,
         visible: action.payload,
+        loading: false,
+      };
+    case CONTACT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     default:
       return state;
