@@ -10,7 +10,7 @@ const Navbar = ({ title, icon }) => {
   const handleClick = (e, { name }) => {
     setActive(name);
   };
-  console.log(user.name);
+
   return (
     <Segment clearing className="blue inverted">
       <Header
@@ -22,6 +22,16 @@ const Navbar = ({ title, icon }) => {
       ></Header>
       <Header as="h3" floated="right">
         <Menu secondary inverted>
+          <Menu.Item
+            as={Link}
+            to="/about"
+            name="about"
+            active={isActive === "about"}
+            onClick={handleClick}
+          >
+            <Icon name="info" />
+            <span className="hide-sm">About</span>
+          </Menu.Item>
           {isAuthenticated && (
             <Menu.Menu>
               <Menu.Item
@@ -32,17 +42,7 @@ const Navbar = ({ title, icon }) => {
                 onClick={handleClick}
               >
                 <Icon name="user outline" />
-                <span className="hide-sm">{user.name}</span>
-              </Menu.Item>
-              <Menu.Item
-                as={Link}
-                to="/about"
-                name="about"
-                active={isActive === "about"}
-                onClick={handleClick}
-              >
-                <Icon name="info" />
-                <span className="hide-sm">About</span>
+                <span className="hide-sm">{user && user.name}</span>
               </Menu.Item>
               <Menu.Item as={Link} to="/logout">
                 <Icon name="sign out alternate" />
@@ -57,7 +57,10 @@ const Navbar = ({ title, icon }) => {
               name="login"
               active={isActive === "login"}
               onClick={handleClick}
-            ></Menu.Item>
+            >
+              <Icon name="sign in" />
+              <span className="hide-sm">Login</span>
+            </Menu.Item>
           )}
           {!isAuthenticated && (
             <Menu.Item
@@ -66,7 +69,10 @@ const Navbar = ({ title, icon }) => {
               name="register"
               active={isActive === "register"}
               onClick={handleClick}
-            ></Menu.Item>
+            >
+              <Icon name="signup" />
+              <span className="hide-sm">Register</span>
+            </Menu.Item>
           )}
         </Menu>
       </Header>
