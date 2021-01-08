@@ -3,9 +3,11 @@ import { Icon, Header, Menu, Segment } from "semantic-ui-react";
 import { string } from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+
 const Navbar = ({ title, icon }) => {
   const [isActive, setActive] = useState("home");
   const authContext = useContext(AuthContext);
+
   const { isAuthenticated, user } = authContext;
   const handleClick = (e, { name }) => {
     setActive(name);

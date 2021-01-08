@@ -38,6 +38,9 @@ const contactReducer = (state, action) => {
       return {
         ...state,
         contacts: [],
+        current: null,
+        error: null,
+        filtered: null,
         loading: false,
       };
     case SET_CURRENT:
@@ -56,7 +59,7 @@ const contactReducer = (state, action) => {
       return {
         ...state,
         contacts: state.contacts.map((contact) =>
-          contact._id === action.payload.id ? action.payload : contact
+          contact._id === action.payload._id ? action.payload : contact
         ),
         loading: false,
       };

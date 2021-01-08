@@ -18,7 +18,6 @@ const Contacts = () => {
   if (loading) {
     return <Spinner />;
   }
-  console.log(loading);
   return (
     <>
       <Transition.Group>
