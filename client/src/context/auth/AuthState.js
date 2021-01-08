@@ -12,7 +12,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
 } from "../types";
-import setAuthToken from "../../setAuthToken";
+import setAuthToken from "../../utils/setAuthToken";
 
 const AuthState = (props) => {
   const initialState = {
@@ -79,7 +79,7 @@ const AuthState = (props) => {
 
   //LOGOUT
   const logout = () => {
-    dispatch({ type: LOGOUT, payload: "" });
+    dispatch({ type: LOGOUT });
   };
   //Clear errors
   const clearErrors = () => {

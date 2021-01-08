@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ContactContext from "../../context/contact/contactContext";
-import { Container, Form, Header } from "semantic-ui-react";
+import { Container, Form } from "semantic-ui-react";
 
 const ContactFilter = () => {
   const contactContext = useContext(ContactContext);

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Header, Menu, Segment } from "semantic-ui-react";
+import React, { useState, useContext } from "react";
+import { Icon, Header, Menu, Segment } from "semantic-ui-react";
 import { string } from "prop-types";
 import { Link } from "react-router-dom";
-
+import AuthContext from "../../context/auth/authContext";
 const Navbar = ({ title, icon }) => {
   const [isActive, setActive] = useState("home");
-
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, user } = authContext;
   const handleClick = (e, { name }) => {
     setActive(name);
   };
+  console.log(user.name);
   return (
     <Segment clearing className="blue inverted">
       <Header
@@ -20,34 +22,52 @@ const Navbar = ({ title, icon }) => {
       ></Header>
       <Header as="h3" floated="right">
         <Menu secondary inverted>
-          <Menu.Item
-            as={Link}
-            to="/"
-            name="home"
-            active={isActive === "home"}
-            onClick={handleClick}
-          ></Menu.Item>
-          <Menu.Item
-            as={Link}
-            to="/about"
-            name="about"
-            active={isActive === "about"}
-            onClick={handleClick}
-          ></Menu.Item>
-          <Menu.Item
-            as={Link}
-            to="/login"
-            name="login"
-            active={isActive === "login"}
-            onClick={handleClick}
-          ></Menu.Item>
-          <Menu.Item
-            as={Link}
-            to="/register"
-            name="register"
-            active={isActive === "register"}
-            onClick={handleClick}
-          ></Menu.Item>
+          {isAuthenticated && (
+            <Menu.Menu>
+              <Menu.Item
+                as={Link}
+                to="/"
+                name="home"
+                active={isActive === "home"}
+                onClick={handleClick}
+              >
+                <Icon name="user outline" />
+                <span className="hide-sm">{user.name}</span>
+              </Menu.Item>
+              <Menu.Item
+                as={Link}
+                to="/about"
+                name="about"
+                active={isActive === "about"}
+                onClick={handleClick}
+              >
+                <Icon name="info" />
+                <span className="hide-sm">About</span>
+              </Menu.Item>
+              <Menu.Item as={Link} to="/logout">
+                <Icon name="sign out alternate" />
+                <span className="hide-sm">Logout</span>
+              </Menu.Item>
+            </Menu.Menu>
+          )}
+          {!isAuthenticated && (
+            <Menu.Item
+              as={Link}
+              to="/login"
+              name="login"
+              active={isActive === "login"}
+              onClick={handleClick}
+            ></Menu.Item>
+          )}
+          {!isAuthenticated && (
+            <Menu.Item
+              as={Link}
+              to="/register"
+              name="register"
+              active={isActive === "register"}
+              onClick={handleClick}
+            ></Menu.Item>
+          )}
         </Menu>
       </Header>
     </Segment>

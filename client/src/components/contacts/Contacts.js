@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Transition, List } from "semantic-ui-react";
+import { Transition } from "semantic-ui-react";
 import ContactContext from "../../context/contact/contactContext";
 import { ContactItem } from "./ContactItem";
 
