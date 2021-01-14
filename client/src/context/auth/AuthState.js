@@ -26,8 +26,6 @@ const AuthState = (props) => {
 
   // Load user
   const loadUser = async () => {
-    // @todo - load token into global headers
-    // console.log(localStorage.token);
     if (localStorage.getItem("token")) {
       state.isAuthenticated = true;
       setAuthToken(localStorage.getItem("token"));

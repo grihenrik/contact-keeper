@@ -19,23 +19,22 @@ export const ContactItem = ({ contact }) => {
     toggleVisible(contact.id);
     contactContext.setCurrent(contact);
   };
+  const setColor = () => {
+    return type === "professional" ? "blue" : "green";
+  };
   return (
     <Card fluid key={id + "-card"}>
       <Card.Content>
         <Card.Header as="h4">
           {name}{" "}
           <span style={{ textTransform: "capitalize", float: "right" }}>
-            <Icon
-              name="certificate"
-              className={type === "professional" ? "blue" : "green"}
-            />
+            <Icon name="certificate" className={setColor()} />
             <Button
               size="mini"
-              color={type === "professional" ? "blue" : "green"}
+              color={setColor()}
               style={{ textTransform: "capitalize" }}
-            >
-              {type}
-            </Button>
+              content={type}
+            />
           </span>
         </Card.Header>
         <Card.Content>

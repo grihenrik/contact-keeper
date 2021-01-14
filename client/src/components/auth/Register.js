@@ -47,7 +47,7 @@ const Register = (props) => {
       setAlert("Please enter a valid email address");
     } else {
       removeAlert();
-      console.log(user);
+      // console.log(user);
       await register({
         name: name,
         email: email,
